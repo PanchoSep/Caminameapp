@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <title>Map</title>
+     
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+   <link rel="stylesheet" href="css/index.css" /> 
+     
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="js/cordova-1.5.0.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>     
+ 
+</head> 
+<body> 
+
+
+<!-- Start of first page -->
+<section id="login" data-role="page">
+        <header data-role="header">
+            <h1>Login Camíname</h1>
+        </header>
+        <article data-role="content" >
+            <form id="form_login" style="background:url("img/fondo.png") !important;">
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <label for="txtuser">Usuario:</label>
+                    <input type="text" name="txtuser" id="txtuser" value="" placeholder="Name" />
+                </div>
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <label for="txtpassword">Contraseña:</label>
+                    <input type="password" name="txtpassword" id="txtpassword" value="" placeholder="Password" />
+                </div>
+                
+                <input type="button" value="Login" id="btnLogin">
+
+            </form>
+             <div id="errorMsg" style="background-color:red;color: #FFFFFF;">Usuario o Contraseña no valida</div>
+        </article>
+    </section>
+    <!-- Aqui nuestro dialog con el mensaje de error  -->
+    <section id="pageError" data-role="dialog">
+        <header data-role="header">
+            <h1>Error</h1>
+        </header>
+        <article data-role="content">
+            <p>Usuario o contraseña no valida</p>
+            <a href="#" data-role="button" data-rel="back">Aceptar</a>
+        </article>
+    </section>
+
+<!-- Start of second page -->
+<div data-role="page" id="bar">
+
+    <div data-role="header" data-position="fixed">
+   
+                
+        <h1>Camíname</h1>
+    </div><!-- /header -->
+
+    <div data-role="content" style="width:100%; height:100%; padding:0;">
+            
+                
+            <div id="map"style="width:100%; height:100%" class:"ui-content"></div>
+
+            <div data-role="popup" id="mcCARD" data-overlay-theme="b" data-dismissible="false" style="min-width:280px;" data-transition="turn">
+        <div data-role="header"> <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <h1>Choose at Own Risk</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <p class="center"></p>
+            <br/>
+            <div class="center"> </div>
+            <div class="ui-grid-a ui-mini" id="mcAnswers">
+                <div><a id="1" onclick="submitMC(this)" class="ui-btn ui-corner-all ui-shadow">A</a></div>
+                <div><a id="2" onclick="submitMC(this)" class="ui-btn ui-corner-all ui-shadow">B</a></div>
+                <div><a id="3" onclick="submitMC(this)" class="ui-btn ui-corner-all ui-shadow">C</a></div>
+               
+            </div>
+        </div>
+    </div>
+        <div data-role="popup" id="gameoverMC" data-dismissible="false" style="min-width:300px;" data-transition="flow" data-theme="a">
+        <div data-role="header">
+            <h1></h1>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="center">
+                <p></p>
+                 <a id="false" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">Cerrar</a> </div>
+        </div>
+    </div>
+         </div>
+
+
+    
+
+    <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#trivia" data-role="button"onclick="launch(this.id)" data-inline="true"   >Prueba Trivia</a>
+                        </li>
+                        
+                    </ul>
+
+                </div>  
+    
+        
+    
+        
+    </div><!-- /footer -->
+</div><!-- /page -->    
+    
+
+
+
+
+
+
+ 
+</html>

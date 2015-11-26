@@ -1,0 +1,21 @@
+
+#map { 
+    position: absolute ;
+    top:40px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px ;
+    
+}
+#pops{
+    
+   
+    
+    z-index: 1;
+}
+#login{
+    background:  :url("fondo.png")!important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
