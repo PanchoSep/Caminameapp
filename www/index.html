@@ -23,28 +23,32 @@
 
 <!-- Start of first page -->
 <section id="login" data-role="page">
-        <header data-role="header">
+<header data-role="header">
             <h1>Login Camíname</h1>
         </header>
-        <article data-role="content" >
-            <form id="form_login" style="background:url("img/fondo.png") !important;">
+<article data-role="content" >
+          <div data-role="fieldcontain">
+      
+<div class="logo"></div>
+        
+            <form id="form_login" >
                 <div data-role="fieldcontain" class="ui-hide-label">
                     <label for="txtuser">Usuario:</label>
                     <input type="text" name="txtuser" id="txtuser" value="" placeholder="Name" />
                 </div>
-                <div data-role="fieldcontain" class="ui-hide-label">
+              <div data-role="fieldcontain" class="ui-hide-label">
                     <label for="txtpassword">Contraseña:</label>
                     <input type="password" name="txtpassword" id="txtpassword" value="" placeholder="Password" />
                 </div>
                 
                 <input type="button" value="Login" id="btnLogin">
 
-            </form>
+</form>
              <div id="errorMsg" style="background-color:red;color: #FFFFFF;">Usuario o Contraseña no valida</div>
         </article>
     </section>
     <!-- Aqui nuestro dialog con el mensaje de error  -->
-    <section id="pageError" data-role="dialog">
+<section id="pageError" data-role="dialog">
         <header data-role="header">
             <h1>Error</h1>
         </header>

@@ -14,8 +14,11 @@
     z-index: 1;
 }
 #login{
-    background:  :url("fondo.png")!important;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background:url(../img/fondo.png);
 }
+.logo{
+	width:auto;
+	height:auto;
+	background:url(../icon.png);
+	
+	}
