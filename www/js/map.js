@@ -1,3 +1,7 @@
+var PARSE_APP ="xSoXrxrcic8dufilndWv5hE4naQy6kQ67G6IlPwi";
+var PARSE_JS = "UODhEg3X7gIoeEoRYkAdH335zYSVcoD9YCqqilF7";
+var query;
+var inst=" ";
 var map;
 var marker;
 var infowindow;
@@ -47,23 +51,31 @@ function map(){
     
      
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-        $.getJSON('http://192.168.43.103:80/caminamedb/puntos_db.php',function(data){
-        //Guardamos los datos de los puntos para usarlos despues
-        datos=$.parseJSON(JSON.stringify(data));
 
-        //datos=data;
-        for (var i=0;i<data.length;i++){
+	Parse.initialize(PARSE_APP, PARSE_JS);
+		
+		var puntosObject= Parse.Object.extend("puntos");
+		
+		
+		query = new Parse.Query(puntosObject);
+		query.find({
+			success:function(resultados){
+				for (var i=0;i<resultados.length;i++){
             //alert(data[i].nombre);
 
-            var punto = new google.maps.LatLng(data[i].latitud, data[i].longitud);
+            var punto = new google.maps.LatLng(resultados[i].get("latitud"), resultados[i].get("longitud"));
             marcador = new google.maps.Marker({
             position: punto,
             icon:'img/city.png',
             map: map
         });
         }
-
-    });
+				},
+			error:function(error){
+				alert("error obteniendo base de datos");
+				}
+			});
+        
         //get geoposition once
         //navigator.geolocation.getCurrentPosition(geo_success, geo_error, { maximumAge: 5000, timeout: 5000, enableHighAccuracy: true });
         //watch for geoposition change
@@ -93,20 +105,32 @@ function geo_success(position) {
         //move marker to new position
         marker.setPosition(point);
     }
+	
+	//Comparamos la distancia entre el dispositivo y los marcadores
+    query.find({
+			success:function(resultados){
+				for (var i=0;i<resultados.length;i++){
+            //alert(data[i].nombre);
+					var dist=distance(position.coords.latitude, position.coords.longitude,resultados[i].get("latitud"),resultados[i].get("longitud"));
+        			if(dist<0.07){
+						if(inst == resultados[i].get("objectId")){
+							//no hace nada porque ya realizó la trivia de este punto 
+							}
+						else{
+							inst=resultados[i].get("objectId");
+							launch();
+							}            
+        				}
+        			}
+				},
+			error:function(error){
+				alert("error obteniendo base de datos");
+				}
+			});
     
-    //Comparamos la distancia entre el dispositivo y los marcadores
-    for(var i=0;i<datos.length;i++){
-        var dist=distance(position.coords.latitude, position.coords.longitude,datos[i].latitud,datos[i].longitud);
-        if(dist<0.07){
-            //$.mobile.changePage('#pops', 'pop', true, true);
-           launch("trivia");
+    
+    
 
-            
-        }
-    }
-    
-    
-    //alert(datos[0].nombre);
 
 
 }
