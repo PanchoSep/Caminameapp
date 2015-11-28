@@ -11,19 +11,16 @@ var datos;
 
 $(document).on('pageshow','#bar',function(){
     document.addEventListener("deviceready", onDeviceReady, false);
-    //for testing in Chrome browser uncomment
     onDeviceReady();
 });
  
-//PhoneGap is ready function
+//FUNCION QUE SE EJECUTA UNA VEZ QUE EL DISPOSITIVO Y PHONEGAP ESTÉ LISTO
 function onDeviceReady() {
-    //$(window).unbind();
-    //$(window).bind('pageshow resize orientationchange', function(e){
-    
+
     max_height();
     google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
 }
- //Funcion que mantiene el mapa ajustado a la pantalla
+ //FUNCION PARA MANTENER EL MAPA AJUSTADO A LA PANTALLA
 function max_height(){
     var header = $.mobile.activePage.find("div[data-role='header']:visible");
     var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
@@ -37,6 +34,7 @@ function max_height(){
     $.mobile.activePage.find('[data-role="content"]').height(content_height);
 }
          
+	//FUNCION QUE INICIALIZA EL MAPA
 function map(){
     var latlng = new google.maps.LatLng(55.17, 23.76);
     var myOptions = {
@@ -49,9 +47,10 @@ function map(){
     map = new google.maps.Map(document.getElementById("map"), myOptions);
 
     
-     
+     //UNA VEZ QUE ESTÉ INCIALIZADO EL MAPA SE EJECUTA LO SIGUIENTE
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-
+	
+	// SE INICIALIZA PARSE PARA EXTRAER LOS MARCADORES DESDE LA BASE DE DATOS
 	Parse.initialize(PARSE_APP, PARSE_JS);
 		
 		var puntosObject= Parse.Object.extend("puntos");
@@ -60,6 +59,7 @@ function map(){
 		query = new Parse.Query(puntosObject);
 		query.find({
 			success:function(resultados){
+				// RECORRE LA BASE DE DATOS DE MARCADORES Y LOS APLICA EN EL MAPA
 				for (var i=0;i<resultados.length;i++){
             //alert(data[i].nombre);
 
@@ -76,9 +76,9 @@ function map(){
 				}
 			});
         
-        //get geoposition once
+        //PARA OBTENER LA GEOLOCALIZACIÓN UNA VEZ 
         //navigator.geolocation.getCurrentPosition(geo_success, geo_error, { maximumAge: 5000, timeout: 5000, enableHighAccuracy: true });
-        //watch for geoposition change
+        //PARA BUSCAR GEOLOCALIZACION CONSTANTE
         watchID = navigator.geolocation.watchPosition(geo_success, geo_error, { maximumAge: 5000, timeout: 5000, enableHighAccuracy: true });   
     }); 
 }
@@ -88,6 +88,7 @@ function geo_error(error){
     alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 }
  
+ // LA GEOLOCALIZACIÓN ES VALIDA
 function geo_success(position) {
      
     map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
@@ -95,23 +96,24 @@ function geo_success(position) {
  
     var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     if(!marker){
-        //create marker
+        //SE CREA MARCADOR EN LA POSICION DEL DISPOSITIVO
         marker = new google.maps.Marker({
             position: point,
             icon:'img/gps.png',
             map: map
         });
     }else{
-        //move marker to new position
+        //SE MUEVE EL MARCADOR A LA POSICION ACTUALIZADA
         marker.setPosition(point);
     }
 	
-	//Comparamos la distancia entre el dispositivo y los marcadores
     query.find({
 			success:function(resultados){
+				
 				for (var i=0;i<resultados.length;i++){
-            //alert(data[i].nombre);
+        			//SE LLAMA A LA FUNCION DISTANCE() PARA COMPARAR DISTANCIA ENTRE EL DISPOSITIVO Y LOS MARCADORES
 					var dist=distance(position.coords.latitude, position.coords.longitude,resultados[i].get("latitud"),resultados[i].get("longitud"));
+					// SI LA DISTANCIA ES MENOR A 70 MTS DE UN PUNTO SE EJECUTA EL POPUP DE TRIVIA
         			if(dist<0.07){
 						if(inst == resultados[i].get("objectId")){
 							//no hace nada porque ya realizó la trivia de este punto 
@@ -134,6 +136,7 @@ function geo_success(position) {
 
 
 }
+//FUNCION QUE CALCULA DISTANCIA ENTRE DOS PUNTOS
 function distance(lat1, lon1, lat2, lon2) {
   var p = 0.017453292519943295;    // Math.PI / 180
   var c = Math.cos;

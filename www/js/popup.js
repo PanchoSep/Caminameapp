@@ -1,19 +1,23 @@
-
-
-  
+      
         var PARSE_APP ="xSoXrxrcic8dufilndWv5hE4naQy6kQ67G6IlPwi";
 		var PARSE_JS = "UODhEg3X7gIoeEoRYkAdH335zYSVcoD9YCqqilF7";
+		
         var respuestaCorrecta;
 
 
-		//Funcion para crear la trivia
+// FUNCION QUE CREA Y MUESTRA LA TRIVIA
         function launch() {
+			
+			//SE INICIALIZA PARSE PARA EXTRAER LA TRIVIA DEL SERVIDOR
             Parse.initialize(PARSE_APP, PARSE_JS);
 			var triviaObject= Parse.Object.extend("trivia");
 			var query = new Parse.Query(triviaObject);
 			query.find({
 				success:function(resultado){
+					//SE ELIGE UN NUMERO AL AZAR ENTRE LA CANTIDAD DE TRIVIAS
 					var numPregunta=Math.floor(Math.random() * resultado.length);
+					// SE CREA EL FORMATO DE LA TRIVIA RELLENENANDO CON LOS DATOS 
+					// QUE SE EXTRAJERON DEL SERVIDOR PARSE
 					$('#trivia div.ui-content a').removeClass('greenBtn');
                 $('#trivia div.ui-content a').removeClass('redBtn');
                 $('#trivia h1').html("Trivia");
@@ -37,25 +41,21 @@
             
         }
        
-        
-        
- 		//al pinchar alternativa
-        function alternativa(resp) {
-            //RIGHT
-			
-            if (resp == respuestaCorrecta) {
+          // FUNCION QUE SE EJECUTA AL PRESIONAR UNA ALTERNATIVA DEL POPUP
+        function alternativa(current) {
+            	
+			// VERIFICA SI LA ALTERNATIVA ES CORRECTA
+            if (current == respuestaCorrecta) {
 				
-                //ion.sound.play("glass"); 
-                //$(current).addClass('greenBtn');
+               
                 $("#trivia").popup("close");
                 
                 correcta();
                 
             }
-            //WRONG
+            
             else {
                 
-                //$(current).addClass('redBtn');
                 $("#trivia").popup("close");
                
                 incorrecta();
@@ -64,7 +64,11 @@
 
 
 
-        //si es incorrecto
+        
+
+        
+
+		// FUNCION QUE SE EJECUTA SI LA RESPUESTA ES INCORRECTA
         function incorrecta() {
             setTimeout(function () {
                 $('#resultado h1').html("¡Incorrecto!");
@@ -72,8 +76,8 @@
                 $("#resultado").popup("open");
             }, 600);
         }
-
-/		//si es correcto
+		
+ 		// FUNCION QUE SE EJECUTA SI LA RESPUESTA ES CORRECTA
         function correcta() {
                         
             setTimeout(function () {
@@ -83,6 +87,6 @@
             }, 600);
         }
         
-/*** Multiple Choice RERUN SAME QUIZ DATA ***/ 
+ 
 		
 	
