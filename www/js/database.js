@@ -2,7 +2,7 @@ var PARSE_APP ="xSoXrxrcic8dufilndWv5hE4naQy6kQ67G6IlPwi";
 var PARSE_JS = "UODhEg3X7gIoeEoRYkAdH335zYSVcoD9YCqqilF7";
 
 $(document).on('pageshow','#login',function(){
-    $("#errorMsg").hide();
+   // $("#errorMsg").hide();
     $("#botonLogin").click(function(){
 		
 		var login= false;
@@ -30,7 +30,8 @@ $(document).on('pageshow','#login',function(){
 						//SI EL LOGUEO ES POSITIVO SE CAMBIA AL LA PAGINA DEL MAPA
 						$.mobile.changePage("#bar");
 					}else{
-						$.mobile.changePage('#pageError', 'pop', true, true);		
+						//$.mobile.changePage('#logerror', 'pop', true, true);		
+						$("#logerror").popup("open");
 					}
 				
 				},

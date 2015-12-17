@@ -35,25 +35,22 @@
       </div>
   	  <a href="#" data-role="button" id="botonLogin">Ingresar</a>
   	  </form>
-  
+      
+   <div data-role="popup" id="logerror" data-transition="fade">
+   		<div data-role="header">
+        <p>Error</p>
+   		</div> 
+        <div role="main" class="ui-content">
+         <p>Usuario o contraseña no valida</p>
+            <a href="#" data-role="button" data-rel="back">Aceptar</a>
+        </div>
+        
+   </div>
   
   </div>
 </div> 
-   <!-- Aqui nuestro dialog con el mensaje de error  -->
-<section id="pageError" data-role="dialog">
-        <header data-role="header">
-            <h1>Error</h1>
-        </header>
-        <article data-role="content">
-            <p>Usuario o contraseña no valida</p>
-            <a href="#" data-role="button" data-rel="back">Aceptar</a>
-        </article>
-    </section>
 
-
-
-
- 
+  
 
 <!-- Start of second page -->
 <div data-role="page" id="bar">
@@ -69,9 +66,9 @@
                 
             <div id="map"style="width:100%; height:100%" class:"ui-content"></div>
 
-            <div data-role="popup" id="trivia" data-overlay-theme="b" data-dismissible="false" style="min-width:280px;" data-transition="turn">
+            <div data-role="popup" id="trivia" data-overlay-theme="b" data-dismissible="false" style="min-width:280px;" data-transition="fade">
         <div data-role="header"> <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <h1>Choose at Own Risk</h1>
+            <h1>Elige</h1>
         </div>
         <div role="main" class="ui-content">
             <p class="center"></p>
@@ -85,7 +82,7 @@
             </div>
         </div>
     </div>
-        <div data-role="popup" id="resultado" data-dismissible="false" style="min-width:300px;" data-transition="flow" data-theme="a">
+        <div data-role="popup" id="resultado" data-dismissible="false" style="min-width:300px;" data-transition="fade" data-theme="a">
         <div data-role="header">
             <h1></h1>
         </div>

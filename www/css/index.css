@@ -1,4 +1,3 @@
-
 #map { 
     position: absolute ;
     top:40px;
@@ -16,9 +15,72 @@
 #login{
     background:url(../img/fondo.png);
 }
+#pageError{
+	background:url(../img/fondo.png);
+	}
+#botonLogin{
+	color:#FFFFFF;
+	background:#00A2A8;
+	}
 .logo{
 	width:auto;
 	height:176px;
 	background:url(../img/logosmall.png) top no-repeat;
+	animation-duration: 4s;
+  animation-name: slidein;
 	
 	}
+#form_login{
+	animation-duration: 5s;
+  animation-name: log;
+	}
+#logerror{
+	
+	animation-duration:1s;
+	animation-name:fadeInUp;
+	}
+
+@keyframes slidein {
+  0% { 
+        opacity: 0; 
+        transform: translateY(150px); 
+		
+    } 
+70% { 
+        opacity: 1; 
+        transform: translateY(150px);
+		
+    } 	
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+
+}
+@keyframes log {
+  0% { 
+        opacity: 0; 
+        transform: translateY(100px); 
+		
+    } 
+70% { 
+        opacity: 0; 
+        transform: translateY(100px);
+		
+    } 	
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+
+}
+@keyframes fadeInUp { 
+    0% { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    } 
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+} 
